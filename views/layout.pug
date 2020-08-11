@@ -1,0 +1,37 @@
+doctype html
+html
+head
+    title= title
+    link(rel='stylesheet' href='/stylesheets/style.css')
+    link(rel='stylesheet' href='/css/uikit.min.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+body
+    nav.uk-navbar-container(uk-navbar="mode: click")
+        .uk-navbar-left 
+            ul.uk-navbar-nav
+                li.uk-active
+                    a(href="#") Active
+                li
+                    a(href="#") Parent
+                    .uk-navbar-dropdown
+                        ul.uk-nav.uk-navbar-dropdown-nav
+                            
+                            li
+                                a(href="/") Main page 
+        if sessionLogin
+            .uk-navbar-right 
+                ul.uk-navbar-nav
+                    li
+                        a= sessionLogin
+                    li
+                        a(href="/users/logout") Logout
+        else 
+            .uk-navbar-right 
+                    ul.uk-navbar-nav
+                        li
+                            a(href="/users/registration") Registration
+                        li
+                            a(href="/users/login") Login
+    block content
+
+script(src="/js/uikit.min.js")
