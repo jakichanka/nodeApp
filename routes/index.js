@@ -1,10 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express')
+const router = express.Router()
+const e = require('../e')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    if (req.session.login) {
-        res.render('index', { title: 'Express', sessionLogin: req.session.login });
+router.get('/', e.lib.checkAuth(), function(req, res, next) {
+    if (req.user) {
+        res.render('index', { title: 'Express', user: req.user.login });
     } else {
         res.render('index', { title: 'Express' });
     }

@@ -15,6 +15,10 @@ block content
                 .uk-alert-success(uk-alert)
                     a.uk-alert-close(uk-close)
                     p= good
+            if messages.error
+                .uk-alert-danger(uk-alert)
+                    a.uk-alert-close(uk-close)
+                    p= messages.error
             if err
                 .uk-alert-danger(uk-alert)
                     a.uk-alert-close(uk-close)

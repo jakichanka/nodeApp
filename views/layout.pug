@@ -18,11 +18,11 @@ body
                             
                             li
                                 a(href="/") Main page 
-        if sessionLogin
+        if user
             .uk-navbar-right 
                 ul.uk-navbar-nav
                     li
-                        a= sessionLogin
+                        a= user
                     li
                         a(href="/users/logout") Logout
         else 
