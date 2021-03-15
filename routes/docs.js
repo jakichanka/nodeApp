@@ -66,15 +66,15 @@ router.post(
   e.lib.checkAuth(),
   multipartMiddleware,
   async function (req, res, next) {
-    fs.rename(
+    await fs.rename(
       req.files.doc.path,
       "./downloads/" + req.files.doc.name,
       function (err) {
         if (err) throw err;
         console.log("renamed complete");
       }
-    );
-    fs.copyFile("./downloads/" + req.files.doc.name, "./public/" + req.files.doc.name, (err) => {
+    )
+    await fs.copyFile("./downloads/" + req.files.doc.name, "./public/" + req.files.doc.name, (err) => {
       if (err) 
           throw err;
       console.log('source.txt was copied to destination.txt');
