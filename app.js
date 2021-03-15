@@ -26,7 +26,7 @@ app.use(flash())
 
 const client  = redis.createClient({
   port: 6379,
-  host: 'localhost'
+  host: '0.0.0.0'
 });
 
 app.use(session({

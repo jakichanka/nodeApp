@@ -1,18 +1,20 @@
 extends layout
 
 block content
-    .uk-container
-        form.uk-margin-large-top.uk-animation-scale-down.uk-form-width-large.uk-margin-auto(method="post" action="/docs/upload")
-            fieldset.uk-fieldset
-                legend.uk-legend.uk-text-center Documents form
-                    input.uk-input.uk-margin-top(type="text" name="title" placeholder="Title" )
-                    textarea.uk-textarea.uk-margin-top(name="mainText" rows="5" placeholder="Type text here" style={resize:"none"})
-                    button.uk-margin-top.uk-button.uk-button-primary(type="submit") Send
-                if good
-                    .uk-alert-success(uk-alert)
-                        a.uk-alert-close(uk-close)
-                        p= good
-                if error
-                    .uk-alert-danger(uk-alert)
-                        a.uk-alert-close(uk-close)
-                        p= err
+    .uk-container.uk-animation-scale-down
+        form.uk-margin-large-top.uk-form-width-large.uk-margin-auto(action='/docs/upload' method='POST' enctype='multipart/form-data')
+            .uk-margin.uk-text-center(uk-margin)
+                div(uk-form-custom="target: true")
+                    input(type='file' name='doc')
+                    input.uk-input.uk-form-width-medium(type='text' placeholder="Select file" disabled)
+                button.uk-button.uk-button-default Submit
+            if good
+                .uk-alert-success(uk-alert)
+                    a.uk-alert-close(uk-close)
+                    p= good
+            if error
+                .uk-alert-danger(uk-alert)
+                    a.uk-alert-close(uk-close)
+                    p= err
+                    
+            
