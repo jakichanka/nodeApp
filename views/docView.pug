@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    .uk-container.uk-animation-fade(style={'background-color':'gray','margin':'0 !important','max-width':'100% !important'})
+        .uk-margin
+        .uk-container(style={'background-color':'white','min-height':'calc(100vh - 120px)'})
+            div.uk-padding
+                h2.uk-margin-top.uk-text-center.uk-text-break= doc.title
+                p.uk-margin-top.uk-text-center.uk-text-lead.uk-text-break= doc.text
+        .uk-margin

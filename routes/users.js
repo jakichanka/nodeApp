@@ -16,7 +16,7 @@ router.get('/registration', (req, res, next) => {
 router.post('/registration', async (req, res) => {
     let login = req.body.login || false
     let password = req.body.password || false
-    if(!login || !password) res.render('registration', {err: 'Fill in all the fields'})
+    if(!login || !password) res.render('registration', {title: 'Registration', err: 'Fill in all the fields'})
     const cryptedPassword = crypto(password).encrypt();
     const user = new User({
         login: login,
@@ -24,12 +24,12 @@ router.post('/registration', async (req, res) => {
     })
     try { 
         await user.save();
-        res.render('registration', {good: 'Registration is successfully done'})
+        res.render('registration', {title: 'Registration', good: 'Registration is successfully done'})
     } catch(err) {
         if(err.code == 11000) {
-            res.render('registration', {err: 'User is already registered'})
+            res.render('registration', {title: 'Registration', err: 'User is already registered'})
         } else {
-            res.render('registration', {err: 'Something went wrong :('})
+            res.render('registration', {title: 'Registration' ,err: 'Something went wrong :('})
         }
     }
         

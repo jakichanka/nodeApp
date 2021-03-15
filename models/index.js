@@ -1,7 +1,7 @@
-const Todos = require('./Todos')
-const Users = require('./Users')
 
+const Users = require('./Users')
+const Docs = require('./Docs')
 module.exports = {
-    Todos,
-    Users
+    Users,
+    Docs
 }

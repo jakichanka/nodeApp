@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    .uk-container.uk-animation-fade
+        if allDocs
+            each doc in allDocs
+                .uk-flex.uk-flex-middle.uk-margin-top
+                    h3.uk-margin-remove
+                        a.uk-link-heading(href="/docs/view/" + doc._id)= doc.title
+                    a.uk-link-heading.uk-margin-left(href="/docs/download/" + doc.title) 
+                        button.uk-button-default.uk-button Download
+        if info 
+            h3.uk-margin-top= info
+        if error 
+            .uk-alert-danger(uk-alert)
+                a.uk-alert-close(uk-close)
+                p= error

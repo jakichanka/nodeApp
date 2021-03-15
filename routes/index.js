@@ -4,11 +4,6 @@ const e = require('../e')
 
 /* GET home page. */
 router.get('/', e.lib.checkAuth(), function(req, res, next) {
-    if (req.user) {
-        res.render('index', { title: 'Express', user: req.user.login });
-    } else {
-        res.render('index', { title: 'Express' });
-    }
-    
-});
+    res.render('index', { title: 'App', user: req.user.login})
+})
 module.exports = router;
