@@ -39,9 +39,9 @@ router.get("/view/:filename", e.lib.checkAuth(), async (req, res, next) => {
   fs.readdir("./downloads", (err, files) => {
     files.forEach((file) => {
       if (file == req.params.filename) {
-        const filePath = path.join(__dirname, "..", "downloads/", file);
-        console.log(filePath)
-        res.render("docView", { doc: filePath });
+        // const filePath = path.join(__dirname, "..", "downloads/", file);
+        // console.log(filePath)
+        res.render("docView", { doc: file });
       }
     });
   });
