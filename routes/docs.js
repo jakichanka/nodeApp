@@ -66,24 +66,37 @@ router.post(
   e.lib.checkAuth(),
   multipartMiddleware,
   async function (req, res, next) {
-    await fs.rename(
-      req.files.doc.path,
-      "./downloads/" + req.files.doc.name,
-      function (err) {
-        if (err) throw err;
-        console.log("renamed complete");
-      }
-    )
-    await fs.copyFile("./downloads/" + req.files.doc.name, "./public/" + req.files.doc.name, (err) => {
-      if (err) 
-          throw err;
-      console.log('source.txt was copied to destination.txt');
-  });
-    res.render("docsForm", {
-      title: "Docs",
-      user: req.user.login,
-      good: "Successfully added",
-    });
+    console.log(req.files);
+    if (path.extname(req.files.doc.path) != ".pdf") {
+      res.render("docsForm", {
+        title: "Docs",
+        user: req.user.login,
+        err: "Only .pdf docs supported",
+      });
+      res.end();
+    } else {
+      await fs.rename(
+        req.files.doc.path,
+        "./downloads/" + req.files.doc.name,
+        function (err) {
+          if (err) throw err;
+          console.log("renamed complete");
+        }
+      );
+      await fs.copyFile(
+        "./downloads/" + req.files.doc.name,
+        "./public/" + req.files.doc.name,
+        (err) => {
+          if (err) throw err;
+          console.log("source.txt was copied to destination.txt");
+        }
+      );
+      res.render("docsForm", {
+        title: "Docs",
+        user: req.user.login,
+        good: "Successfully added",
+      });
+    }
   }
 );
 
