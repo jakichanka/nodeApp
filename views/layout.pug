@@ -9,16 +9,15 @@ body
     nav.uk-navbar-container(uk-navbar="mode: click")
         .uk-navbar-left 
             ul.uk-navbar-nav
-                li.uk-active
-                    a(href="#") Active
-                li
-                    a(href="#") Parent
-                    .uk-navbar-dropdown
-                        ul.uk-nav.uk-navbar-dropdown-nav        
-                            li
-                                a(href="/") Main page 
-                            li
-                                a(href="/docs/view") Documents
+                if user
+                    li
+                        a(href="#") Menu
+                        .uk-navbar-dropdown
+                            ul.uk-nav.uk-navbar-dropdown-nav        
+                                li
+                                    a(href="/") Main page 
+                                li
+                                    a(href="/docs/view") Documents
         if user
             .uk-navbar-right 
                 ul.uk-navbar-nav

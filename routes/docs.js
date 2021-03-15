@@ -14,9 +14,7 @@ router.get("/view", e.lib.checkAuth(), async function (req, res, next) {
   const allDocs = [];
   fs.readdir("./downloads", (err, files) => {
     files.forEach((file) => {
-      //   console.log(path.basename(file));
       allDocs.push(path.basename(file));
-      // console.log(allDocs)
     });
     console.log(allDocs);
     if (allDocs.length == 0) {
@@ -39,8 +37,6 @@ router.get("/view/:filename", e.lib.checkAuth(), async (req, res, next) => {
   fs.readdir("./downloads", (err, files) => {
     files.forEach((file) => {
       if (file == req.params.filename) {
-        // const filePath = path.join(__dirname, "..", "downloads/", file);
-        // console.log(filePath)
         res.render("docView", { doc: file });
       }
     });
@@ -49,7 +45,7 @@ router.get("/view/:filename", e.lib.checkAuth(), async (req, res, next) => {
 
 router.get("/download/:filename", e.lib.checkAuth(), (req, res, next) => {
   const filename = req.params.filename;
-  const path = "./downloads/" + filename + ".doc";
+  const path = "./downloads/" + filename;
   res.download(path, function (error) {
     if (error) {
       res.render("allDocsView", {
@@ -78,6 +74,11 @@ router.post(
         console.log("renamed complete");
       }
     );
+    fs.copyFile("./downloads/" + req.files.doc.name, "./public/" + req.files.doc.name, (err) => {
+      if (err) 
+          throw err;
+      console.log('source.txt was copied to destination.txt');
+  });
     res.render("docsForm", {
       title: "Docs",
       user: req.user.login,
